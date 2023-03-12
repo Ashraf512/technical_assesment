@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Employee List table</title>
+</h:head>
+<h:body bgcolor="blue">
+	<h3>Employees List </h3>
+
+	<h:form>
+		<p:dataTable var="employee" value="#{dtBasicView.emlpoyees}"
+			lazy="false" id="tabl" rows="10" editable="true" update=":form:msgs"
+			paginator="true" paginatorPosition="both"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+			rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+			<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" />
+			<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" />
+
+			<p:column headerText="Name">
+				<h:outputText value="#{employee.name}" />
+			</p:column>
+
+			<p:column headerText="Gender">
+				<h:outputText value="#{employee.gender}" />
+			</p:column>
+			<p:column headerText="Department">
+				<h:outputText value="#{employee.dept.departmentName}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+	<br />
+
+	<p:commandButton value="Add Employee" action="addEmployee"
+		styleClass="ui-button-raised" />
+
+
+
+</h:body>
+`
+</html>
